@@ -43,6 +43,7 @@ public class SetTest {
 
     @Test
     public void test() {
+        loginPage.clickLoginBtn();
         loginPage.inputLogin(ConfProperties.getProperty("login"));
         loginPage.clickLoginBtn();
         loginPage.inputPassword(ConfProperties.getProperty("password"));

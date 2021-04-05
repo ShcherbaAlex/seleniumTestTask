@@ -14,7 +14,7 @@ public class MailPage {
     private WebElement theme;
     @FindBy(xpath = "//*[@role='textbox']")
     private WebElement message;
-    @FindBy(xpath = "//*[@class='control button2 button2_view_default button2_tone_default button2_size_l button2_theme_action button2_pin_circle-circle ComposeControlPanelButton-Button ComposeControlPanelButton-Button_action']")
+    @FindBy(xpath = "//button[@data-lego='react'][@aria-disabled='false']")
     private WebElement sendBtn;
 
     public MailPage(WebDriver driver) {

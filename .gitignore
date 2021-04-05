@@ -1,5 +1,5 @@
 # IntellijIdea files
 *.iml
 .idea
-.target
+.target/
 out

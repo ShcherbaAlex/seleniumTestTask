@@ -4,8 +4,11 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 public class SetTest {
@@ -21,9 +24,18 @@ public class SetTest {
     @BeforeClass
     public static void setup() {
         //определение пути до драйвера и его настройка
-        System.setProperty("webdriver.chrome.driver", ConfProperties.getProperty("chromedriver"));
+        //System.setProperty("webdriver.chrome.driver", ConfProperties.getProperty("chromedriver"));
         //создание экземпляра драйвера
-        driver = new ChromeDriver();
+        //driver = new ChromeDriver();
+
+        try {
+            DesiredCapabilities capabilities = new DesiredCapabilities();
+            capabilities.setBrowserName("chrome");
+            driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), capabilities);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
         loginPage = new LoginPage(driver);
         profilePage = new ProfilePage(driver);
         mailPage = new MailPage(driver);
@@ -43,6 +55,7 @@ public class SetTest {
 
     @Test
     public void test() {
+
         loginPage.clickLoginBtn();
         loginPage.inputLogin(ConfProperties.getProperty("login"));
         loginPage.clickLoginBtn();
@@ -56,14 +69,4 @@ public class SetTest {
     }
 }
 
-/**
- * Selenium Grid
- */
-/*  try {
-            DesiredCapabilities capabilities = new DesiredCapabilities();
-            capabilities.setBrowserName("chrome");
-            webDriver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), capabilities);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-*/
+
